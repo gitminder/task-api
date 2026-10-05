@@ -1,0 +1,9 @@
+{
+    "name": "serg/task-api",
+    "autoload": {
+        "psr-4": {
+            "Serg\\TaskApi\\": "src/"
+        }
+    },
+    "require": {}
+}
