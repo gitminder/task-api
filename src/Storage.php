@@ -18,7 +18,7 @@ class Storage
     public function save(){
         file_put_contents(self::STORAGE_FILE_NAME, json_encode($this->storage));
     }
-    public function add($item){
+    public function add($item) : object{
         $maxId = 1;
         foreach($this->storage as $element){
             if($element->id > $maxId){
@@ -28,6 +28,7 @@ class Storage
         $item->id = $maxId + 1;
         $item->created_at = time();
         $this->storage[] = $item;
+        return $item;
     }
     public function getAll()
     {

@@ -3,6 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Serg\TaskApi\Storage;
 use Serg\TaskApi\Task;
+use Serg\TaskApi\TaskService;
 
 header('Content-Type: application/json');
 
@@ -13,30 +14,21 @@ $error = false;
 $found = false;
 $errorMessage = '';
 
+$taskService = new TaskService();
 if ($method === 'GET') {
     if ($path === '/tasks') {
         $found = true;
-        $storage = new Storage();
-        echo json_encode($storage->getAll());
+        echo $taskService->getTasks();
     }
 } elseif ($method === 'POST') {
     if ($path === '/tasks') {
         $found = true;
-        $raw = file_get_contents('php://input');
-        $data = json_decode($raw, false);
-        if (json_last_error() !== JSON_ERROR_NONE) {
+        try {
+            $input = file_get_contents('php://input');
+            $task = $taskService->addTask($input);
+        } catch (\Exception $e) {
             $error = true;
-            $errorMessage = json_last_error_msg();
-        } else {
-
-            if (!Task::parseTaskFormat($data)){
-                $error = true;
-                $errorMessage = 'Invalid task format';
-            } else {
-                $storage = new Storage();
-                $storage->add($data);
-                $storage->save();
-            }
+            $errorMessage = $e->getMessage();
         }
     }
 }
