@@ -4,7 +4,8 @@ namespace Serg\TaskApi;
 
 class TaskService
 {
-    public function getTasks(): string{
+    public function getTasks(): string
+    {
         $storage = new Storage();
         return json_encode($storage->getAll());
     }
@@ -13,7 +14,8 @@ class TaskService
      * @throws \Exception
      */
     //public function addTask(?string $rawBody = null): object{
-    public function addTask(string $raw): object{
+    public function addTask(string $raw): object
+    {
         //$raw = $rawBody ?? file_get_contents('php://input');
         $data = json_decode($raw, false);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -21,7 +23,7 @@ class TaskService
             throw new \Exception(json_last_error_msg());
         } else {
 
-            if (!Task::parseTaskFormat($data)){
+            if (!Task::parseTaskFormat($data)) {
                 //$error = true;
                 throw new \Exception('Invalid task format');
             } else {
