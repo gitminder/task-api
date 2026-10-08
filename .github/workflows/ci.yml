@@ -23,3 +23,6 @@ jobs:
 
       - name: Run tests
         run: ./vendor/bin/phpunit
+
+      - name: Static analysis
+        run: ./vendor/bin/phpstan analyse src --level=6
