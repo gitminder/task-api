@@ -68,3 +68,13 @@ jobs:
 
       - name: Check coding style
         run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
+
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Build Docker image
+        run: docker build -t task-api .
