@@ -15,7 +15,7 @@ class Storage
     private function load(): void
     {
         $fContent = @file_get_contents(self::STORAGE_FILE_NAME);
-        $this->storage = ($fContent === false)?[]:json_decode($fContent);
+        $this->storage = ($fContent === false) ? [] : json_decode($fContent);
     }
     public function save(): void
     {
