@@ -4,10 +4,10 @@ namespace Serg\TaskApi;
 
 class Storage
 {
-    pub  lic const STORAGE_FILE_NAME = __DIR__.'/../storage/tasks.json';
+    public const STORAGE_FILE_NAME = __DIR__.'/../storage/tasks.json';
 
     /** @var array<object> */
-      private array $storage;
+    private array $storage;
     public function __construct()
     {
         $this->load();
