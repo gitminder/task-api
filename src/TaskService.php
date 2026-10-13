@@ -10,6 +10,17 @@ class TaskService
         return json_encode($storage->getAll());
     }
 
+    public function deleteTask(int $id): bool
+    {
+        $storage = new Storage();
+        if (!$storage->delete($id)) {
+            return false;
+        }
+
+        $storage->save();
+        return true;
+    }
+
     /**
      * @throws \Exception
      */
