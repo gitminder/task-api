@@ -32,6 +32,14 @@ if ($method === 'GET') {
             $errorMessage = $e->getMessage();
         }
     }
+} elseif ($method === 'DELETE') {
+    if (preg_match('#^/tasks/([1-9][0-9]*)$#', $path, $matches)) {
+        $id = filter_var($matches[1], FILTER_VALIDATE_INT);
+        if ($id !== false && $taskService->deleteTask($id)) {
+            $found = true;
+            http_response_code(204);
+        }
+    }
 }
 
 if (!$found) {

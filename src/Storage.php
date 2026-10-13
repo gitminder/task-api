@@ -42,4 +42,16 @@ class Storage
     {
         return $this->storage;
     }
+
+    public function delete(int $id): bool
+    {
+        foreach ($this->storage as $index => $item) {
+            if ($item->id === $id) {
+                array_splice($this->storage, $index, 1);
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
